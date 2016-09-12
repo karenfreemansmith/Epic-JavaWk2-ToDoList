@@ -5,7 +5,7 @@ Version 0.0.0: September 9, 2016
 by [Karen Freeman-Smith](https://github.com/karenfreemansmith)
 
 ## Description
-A program estimate cost for various types of events
+A program to keep track of a to-do list
 
 ### Specifications:
 
