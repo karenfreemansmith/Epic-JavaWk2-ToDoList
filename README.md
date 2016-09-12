@@ -1,5 +1,4 @@
 # Spark To-Do List
-
 Version 0.0.0: September 9, 2016
 
 by [Karen Freeman-Smith](https://github.com/karenfreemansmith)
