@@ -1,0 +1,9 @@
+<h1>Categories</h1>
+
+<ul>
+  #foreach($category in $categories)
+    <li><a href="/categories/$category.getId()">$category.getName()</a></li>
+  #end
+</ul>
+
+<a href="/categories/new">Make new category</a>

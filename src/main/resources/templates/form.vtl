@@ -1,6 +1,8 @@
-<p>Add a new task:</p>
+<p>Add a new task to $category.getName():</p>
 
 <form action="/tasks" method="post">
+  <input id="categoryId" name="categoryId" type="hidden" value="$category.getId()">
+
   <label for="description">Task Description</label>
   <input id="description" name="description" type="text">
 
