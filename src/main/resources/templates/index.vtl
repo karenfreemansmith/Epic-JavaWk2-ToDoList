@@ -1,19 +1,4 @@
-<h1>Task List!</h1>
-#if ($tasks)
-  <ul>
-  #foreach ($task in $tasks)
-    <li>$task.getDescription()</li>
-  #end
-  </ul>
-#else
-  <p>No tasks!</p>
-#end
+<h1>Welcome to Our To Do List!</h1>
 
-<p>Add a new Task:</p>
-
-<form action="/tasks" method="post">
-  <label for="description">Task Description</label>
-  <input id="description" name="description" type="text">
-
-  <button type="submit" class="btn btn-default">Add task</button>
-</form>
+<h3><a href="/tasks/new">Add a new task</a></h3>
+<h3><a href="/tasks">View all current tasks</a></h3>
