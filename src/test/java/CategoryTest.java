@@ -57,4 +57,9 @@ public class CategoryTest {
     testCategory.addTask(testTask);
     assertTrue(testCategory.getTasks().contains(testTask));
   }
+
+  @After
+  public void tearDown() {
+    Category.clear();
+  }
 }

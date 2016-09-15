@@ -55,4 +55,9 @@ public class TaskTest {
     Task secondTask = new Task("Buy groceries");
     assertEquals(Task.find(secondTask.getId()), secondTask);
   }
+
+  @After
+  public void tearDown() {
+    Task.clear();
+  }
 }
