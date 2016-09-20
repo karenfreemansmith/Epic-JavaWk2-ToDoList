@@ -21,7 +21,12 @@
 
 <h2>New Task:</h2>
 <form action="/tasks" method="post">
-  <input id="categoryId" name="categoryId" type="hidden" value="$category.getId()">
+  <label for="categoryId">Select a List</label>
+  <select id="categoryId" name="categoryId" type="text">
+    #foreach($category in $categories)
+      <option value="$category.getId()">$category.getName()</option>
+    #end
+  </select>
   <div class="form-group">
     <label for="description">Description</label>
     <input id="description" name="description" type="text" class="form-control">
