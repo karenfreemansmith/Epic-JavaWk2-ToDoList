@@ -68,8 +68,10 @@ public class CategoryTest {
   @After
   public void tearDown() {
     try(Connection con=DB.sql2o.open()) {
-      String sql = "DELETE FROM tasks *;"
-      con.createQuery(sql).execteUpdate();
+      String deleteTasksQuery = "DELETE FROM tasks *;"
+      String deleteCategoriesQuery = "DELETE FROM categories *;"
+      con.createQuery(deleteTasksQuery).execteUpdate();
+      con.createQuery(deleteCategoriesQuery).execteUpdate();
     }
   }
 }
