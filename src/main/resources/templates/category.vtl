@@ -1,8 +1,8 @@
-<h1>$category.getName()</h1>
+<h1>$category.getName() tasks:</h1>
 
 <ul>
   #foreach ($task in $category.getTasks())
-    <li><a href="/tasks/$task.getId()">$task.getDescription()</a></li>
+    <li><a href="/categories/$category_id/tasks/$task.getId()">$task.getDescription()</a></li>
   #end
 </ul>
 
