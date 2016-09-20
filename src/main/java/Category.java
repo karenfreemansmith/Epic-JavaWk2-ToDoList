@@ -12,7 +12,7 @@ public class Category {
 
   @Override
   public boolean equals(Object otherCategory) {
-    if(!(otherCategory instance of Category)) {
+    if(!(otherCategory instanceof Category)) {
       return false;
     } else {
       Category newCategory = (Category) otherCategory;

@@ -13,7 +13,7 @@ public class Task {
   public Task(String description, int categoryId) {
       this.description = description;
       this.completed = false;
-      this.createdAt = LocalDateTime.now();\
+      this.createdAt = LocalDateTime.now();
       this.categoryId = categoryId;
   }
 
