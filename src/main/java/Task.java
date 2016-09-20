@@ -1,47 +1,71 @@
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import org.sql2o.*;
 
 public class Task {
-  private String mDescription;
-  private boolean mCompleted;
-  private LocalDateTime mCreatedAt;
-  private static List<Task> instances = new ArrayList<Task>();
-  private int mId;
+  private String description;
+  private boolean completed;
+  private LocalDateTime createdAt;
+  private int id;
 
   public Task(String description) {
-      mDescription = description;
-      mCompleted = false;
-      mCreatedAt = LocalDateTime.now();
-      instances.add(this);
-      mId = instances.size();
+      this.description = description;
+      this.completed = false;
+      this.createdAt = LocalDateTime.now();
+  }
+
+  @Override
+  public boolean equals(Object otherTask) {
+    if(!(otherTask instanceof Task)) {
+      return false;
+    } else {
+      Task newTask = (Task) otherTask;
+      return this.getDescription().equals(newTask.getDescription()) &&
+             this.getId() == newTask.getId();
+    }
   }
 
   public String getDescription() {
-    return mDescription;
+    return description;
   }
 
   public boolean isCompleted() {
-    return mCompleted;
+    return completed;
   }
 
   public LocalDateTime getCreatedAt() {
-    return mCreatedAt;
+    return createdAt;
+  }
+
+  public void Save() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "INSERT INTO tasks (description) VALUES (:description)";
+      this.id = (int) con.createQuery(sql)
+        .addParameter("description", this.description)
+        .executeUpdate()
+        .getKey();
+    }
   }
 
   public static List<Task> all() {
-    return instances;
-  }
-
-  public static void clear() {
-    instances.clear();
+    String sql = "SELECT id, description FROM taks";
+    try(Connection con = DB.sql2o.open()) {
+      return con.createQuery(sql). executeAndFetch(Task.class);
+    }
   }
 
   public int getId() {
-    return mId;
+    return id;
   }
 
   public static Task find(int id) {
-    return instances.get(id-1);
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM tasks were id=:id";
+      Task task = con.createQuery(sql)
+        .addParameter("id", id)
+        .executeAndFetchFirst(Task.class);
+      return task;
+    }
   }
 }
