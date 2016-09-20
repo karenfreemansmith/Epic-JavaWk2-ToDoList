@@ -39,6 +39,14 @@ public class TaskTest {
   }
 
   @Test
+  public void save_savesCategoryIdIntoDB_true() {
+    Category myCategory = new Category("Household chores");
+    myCategory.save();
+    Task savedTask = Task.find(myTask.getId());
+    assertEquals(savedTask.getCategoryId(), myCategory.getId());
+  }
+
+  @Test
   public void Task_instantiatesWithDescription_String() {
     Task myTask = new Task("Mow the lawn");
     assertEquals("Mow the lawn", myTask.getDescription());
