@@ -1,6 +1,7 @@
 import org.sql2o.*;
 import org.junit.*;
 import static org.junit.Assert.*;
+import java.util.Arrays;
 
 public class CategoryTest {
 
@@ -29,13 +30,6 @@ public class CategoryTest {
     secondCategory.save();
     assertEquals(true, Category.all().get(0).equals(firstCategory));
     assertEquals(true, Category.all().get(1).equals(secondCategory));
-  }
-
-  @Test
-  public void clear_emptiesAllCategoriesFromList_0() {
-    Category testCategory = new Category("Home");
-    Category.clear();
-    assertEquals(Category.all().size(), 0);
   }
 
   @Test
@@ -77,18 +71,15 @@ public class CategoryTest {
   }
 
   @Test
-  public void getTasks_initiallyReturnsEmptyList_ArrayLis() {
-    Category.clear();
-    Category testCategory = new Category("Home");
-    assertEquals(0, testCategory.getTasks().size());
-  }
-
-  @Test
-  public void addTask_addsTaskToList_true() {
-    Category testCategory = new Category("Home");
-    Task testTask = new Task("Mow the lawn");
-    testCategory.addTask(testTask);
-    assertTrue(testCategory.getTasks().contains(testTask));
+  pubic void getTasks_retrievesAllTasksFromDatabase_taskList() {
+    Category mycategory = new Category("Household chores");
+    myCategory.save();
+    Task firstTask = new Task("Mow the lawn", myCategory.getId());
+    firstTask.save();
+    Task secondTask = new Task("Do the dishes", myCategory.getId());
+    secondTask.save();
+    Task[] tasks = new Task[] {firstTask, secondTask};
+    assertTrue(myCategory.getTasks().containsAll(Arrays.asList(tasks))):
   }
 
   @After
