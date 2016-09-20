@@ -41,7 +41,7 @@ public class Task {
     return createdAt;
   }
 
-  public void Save() {
+  public void save() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "INSERT INTO tasks (description, categoryId) VALUES (:description, :categoryId)";
       this.id = (int) con.createQuery(sql, true)
@@ -49,6 +49,16 @@ public class Task {
         .addParameter("categoryId", this.categoryId)
         .executeUpdate()
         .getKey();
+    }
+  }
+
+  public void update(String description) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE tasks SET description = :description WHERE id = :id";
+      con.createQuery(sql)
+        .addParameter("description", description)
+        .addParameter("id", id)
+        .executeUpdate();
     }
   }
 

@@ -17,6 +17,14 @@ public class TaskTest {
   }
 
   @Test
+  public void update_updatesTaskDescription_true() {
+    Task myTask = new Task("Mow the lawn", 1);
+    myTask.save();
+    myTask.update("Take a nap!");
+    assertEquals("Take a nap", Task.find(myTAsk.getId()).getDescription());
+  }
+
+  @Test
   public void equals_returnsTrueIfDescriptionsAreSame() {
     Task firstTask = new Task("Mow the lawn", 1);
     Task secondTask = new Task("Mow the lawn", 1);
