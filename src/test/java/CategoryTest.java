@@ -1,7 +1,14 @@
+import org.sql2o.*;
 import org.junit.*;
 import static org.junit.Assert.*;
 
 public class CategoryTest {
+
+  @Before
+  public void setup() {
+    DB.sql2o = new Sql2o("jdbc:postgresql://localhost:5432/to_do_test", null, null);
+  }
+
   @Test
   public void category_instantiatesCorrectly_true() {
     Category testCategory = new Category("Home");
