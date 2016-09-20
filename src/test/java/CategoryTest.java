@@ -67,6 +67,9 @@ public class CategoryTest {
 
   @After
   public void tearDown() {
-    Category.clear();
+    try(Connection con=DB.sql2o.open()) {
+      String sql = "DELETE FROM tasks *;"
+      con.createQuery(sql).execteUpdate();
+    }
   }
 }
