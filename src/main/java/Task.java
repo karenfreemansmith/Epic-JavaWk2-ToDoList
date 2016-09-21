@@ -86,4 +86,13 @@ public class Task {
       return task;
     }
   }
+
+  public void delete() {
+    try(Connection cn = DB.sql2o.open()) {
+      String sql = "DELETE FROM tasks WHERE id = :id;";
+      cn.createQuery(sql)
+        .addParameter("id", id)
+        .executeUpdate();
+    }
+  }
 }

@@ -36,7 +36,7 @@ public class CategoryTest {
   public void getId_categoriesInstantiateWithAnId_1() {
     Category testCategory = new Category("Home");
     testCategory.save();
-    assertEquals(testCategory.getId()>0);
+    assertTrue(testCategory.getId()>0);
   }
 
   @Test
@@ -71,24 +71,24 @@ public class CategoryTest {
   }
 
   @Test
-  pubic void getTasks_retrievesAllTasksFromDatabase_taskList() {
-    Category mycategory = new Category("Household chores");
+  public void getTasks_retrievesAllTasksFromDatabase_taskList() {
+    Category myCategory = new Category("Household chores");
     myCategory.save();
     Task firstTask = new Task("Mow the lawn", myCategory.getId());
     firstTask.save();
     Task secondTask = new Task("Do the dishes", myCategory.getId());
     secondTask.save();
     Task[] tasks = new Task[] {firstTask, secondTask};
-    assertTrue(myCategory.getTasks().containsAll(Arrays.asList(tasks))):
+    assertTrue(myCategory.getTasks().containsAll(Arrays.asList(tasks)));
   }
 
   @After
   public void tearDown() {
     try(Connection con=DB.sql2o.open()) {
-      String deleteTasksQuery = "DELETE FROM tasks *;"
-      String deleteCategoriesQuery = "DELETE FROM categories *;"
-      con.createQuery(deleteTasksQuery).execteUpdate();
-      con.createQuery(deleteCategoriesQuery).execteUpdate();
+      String deleteTasksQuery = "DELETE FROM tasks *;";
+      String deleteCategoriesQuery = "DELETE FROM categories *;";
+      con.createQuery(deleteTasksQuery).executeUpdate();
+      con.createQuery(deleteCategoriesQuery).executeUpdate();
     }
   }
 }

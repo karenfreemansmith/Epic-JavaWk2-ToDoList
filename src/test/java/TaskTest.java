@@ -21,7 +21,7 @@ public class TaskTest {
     Task myTask = new Task("Mow the lawn", 1);
     myTask.save();
     myTask.update("Take a nap!");
-    assertEquals("Take a nap", Task.find(myTAsk.getId()).getDescription());
+    assertEquals("Take a nap!", Task.find(myTask.getId()).getDescription());
   }
 
   @Test
@@ -44,14 +44,6 @@ public class TaskTest {
     myTask.save();
     Task savedTask = Task.all().get(0);
     assertEquals(myTask.getId(), savedTask.getId());
-  }
-
-  @Test
-  public void save_savesCategoryIdIntoDB_true() {
-    Category myCategory = new Category("Household chores");
-    myCategory.save();
-    Task savedTask = Task.find(myTask.getId());
-    assertEquals(savedTask.getCategoryId(), myCategory.getId());
   }
 
   @Test
@@ -98,13 +90,22 @@ public class TaskTest {
     assertEquals(Task.find(secondTask.getId()), secondTask);
   }
 
+  @Test
+  public void delete_deletesTask_true() {
+    Task myTask = new Task("Mow the lawn", 1);
+    myTask.save();
+    int myTaskId = myTask.getId();
+    myTask.delete();
+    assertEquals(null, Task.find(myTaskId));
+  }
+
   @After
   public void tearDown() {
     try(Connection con=DB.sql2o.open()) {
-      String deleteTasksQuery = "DELETE FROM tasks *;"
-      String deleteCategoriesQuery = "DELETE FROM categories *;"
-      con.createQuery(deleteTasksQuery).execteUpdate();
-      con.createQuery(deleteCategoriesQuery).execteUpdate();
+      String deleteTasksQuery = "DELETE FROM tasks *;";
+      String deleteCategoriesQuery = "DELETE FROM categories *;";
+      con.createQuery(deleteTasksQuery).executeUpdate();
+      con.createQuery(deleteCategoriesQuery).executeUpdate();
     }
   }
 }
